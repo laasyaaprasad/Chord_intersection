@@ -15,4 +15,4 @@ How to Run:
 
 
 Big-O Runtime Estimate:
-  The time complexity of the algorithm, intially was O(n^2). It was later optimized to O(n log n), where n represents the number of chords. The primary contributor to the complexity is the sorting of events. Other operations involve balanced binary search tree operations (specifically, using SortedDict from sortedcontainers), resulting in logarithmic complexity.
+  The time complexity of the algorithm, initially was O(n^2). It was later optimized to O(n log n), where n represents the number of chords. The primary contributor to the complexity is the sorting of events. Other operations involve balanced binary search tree operations (specifically, using SortedDict from sortedcontainers), resulting in logarithmic complexity.
