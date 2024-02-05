@@ -1,7 +1,7 @@
-def count_intersections_quadratic(radians, identifiers):
-    intersections = 0
+#pip install sortedcontainers
+from sortedcontainers import SortedDict
 
-    def count_intersections(radian_measures, chord_identifiers):
+def count_intersections(radian_measures, chord_identifiers):
     events = []  # List to store start and end events
 
     # Populate events list with start and end events
@@ -12,14 +12,25 @@ def count_intersections_quadratic(radians, identifiers):
         elif identifier.startswith("e_"):
             events.append((radian, "end", identifier))
 
-      
-            if start_i < start_j < end_i and end_i < end_j: # Check for intersection
-                intersections += 1
+    events.sort()  # Sort events based on radian measure
+
+    active_chords = SortedDict()  # Balanced BST to store active chords
+    intersections = 0
+
+    for radian, event_type, identifier in events:
+        if event_type == "start":
+            active_chords[identifier] = radian
+        elif event_type == "end":
+            del active_chords[identifier]
+            # Count intersections with chords between start and end
+            intersections += len(active_chords)
 
     return intersections
 
+# Example usage
+radian_measures = [0.78, 1.47, 1.77, 3.92]
+chord_identifiers = ["s_I", "s_2", "e_1", "e_2"]
 
-radians = [0.9, 1.3, 1.70, 2.92]
-identifiers = ['s1', 'e1', 's2', 'e2']
-result = count_intersections_quadratic(radians, identifiers)
-print(f"Number of intersections: {result}")
+result = count_intersections(radian_measures, chord_identifiers)
+print(result)
+
