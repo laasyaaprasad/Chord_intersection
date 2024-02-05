@@ -1,12 +1,16 @@
 def count_intersections_quadratic(radians, identifiers):
     intersections = 0
 
-    for i in range(len(radians)):
-        start_i, end_i = radians[i], identifiers[i]
+    def count_intersections(radian_measures, chord_identifiers):
+    events = []  # List to store start and end events
 
-    
-        for j in range(i + 1, len(radians)): #comparing them with one another 
-            start_j, end_j = radians[j], identifiers[j]
+    # Populate events list with start and end events
+    for i, radian in enumerate(radian_measures):
+        identifier = chord_identifiers[i]
+        if identifier.startswith("s_"):
+            events.append((radian, "start", identifier))
+        elif identifier.startswith("e_"):
+            events.append((radian, "end", identifier))
 
       
             if start_i < start_j < end_i and end_i < end_j: # Check for intersection
